@@ -21,10 +21,10 @@ namespace WICScoring.Repositories
             using (var connection = wicConnectionFactory.OpenDbConnection())
             {
                 connection.CreateTable<Team>();
-                if (connection.Select<Team>(e => e.teamNumber.Equals(team.teamNumber)).Count <= 0)
-                {
+                if (connection.Select<Team>(e => (e.teamNumber == team.teamNumber)).Count <= 0)
+                {  
                     connection.Insert(team);
-                    if (connection.Select<Team>(e => e.teamNumber.Equals(team.teamNumber)).Count > 0)
+                    if (connection.Select<Team>(e => e.teamNumber == team.teamNumber).Count > 0)
                     {
                         return 0;
                     }
@@ -42,7 +42,7 @@ namespace WICScoring.Repositories
                 if (team.Count > 0)
                 {
                     Team t = team[0];
-                    t.allMatcheEntries.Add(match);
+                    t.allMatchEntries.Add(match);
                     t.findAverages();
                     connection.Delete<Team>(e => e.teamNumber.Equals(teamNumber));
                     connection.Insert(t);
@@ -81,5 +81,14 @@ namespace WICScoring.Repositories
             }
         }
 
+        public List<Team> getTeamList ()
+        {
+            using (var connection = wicConnectionFactory.OpenDbConnection())
+            {
+                return connection.Select<Team>(e => !e.teamNumber.Equals(null));
+            }
+        }
+
     }
+
 }

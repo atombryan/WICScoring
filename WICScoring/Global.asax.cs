@@ -51,7 +51,7 @@ namespace WICScoring
                     Roles = new List<string> { "Basic", RoleNames.Admin },
                     Permissions = new List<string> { }
                 }, password);
-                var wicConnectionFactory = new OrmLiteConnectionFactory(@"D:\DB\wic.db", SqliteDialect.Provider) { ConnectionFilter = x => new ProfiledDbConnection(x, Profiler.Current) };
+                var wicConnectionFactory = new OrmLiteConnectionFactory(UniversalProperties.databaseDirectory, SqliteDialect.Provider) { ConnectionFilter = x => new ProfiledDbConnection(x, Profiler.Current) };
                 container.Register<IDbConnectionFactory>(wicConnectionFactory);
                 container.RegisterAutoWired<WicInfoRepository>();
 

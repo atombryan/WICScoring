@@ -13,7 +13,7 @@ namespace WICScoring.WIC
         public int teamNumber { get; set; }
         public string teamName { get; set; }
         public int WAIScore { get; set; }
-        public List<Match> allMatcheEntries { get; set; }
+        public List<Match> allMatchEntries { get; set; }
         public int averageScore { get; set; }
         public int speedIndex { get; set; }
 
@@ -21,7 +21,7 @@ namespace WICScoring.WIC
         {
             int sum = 0;
             int sumSpeed = 0;
-            foreach (Match m in allMatcheEntries)
+            foreach (Match m in allMatchEntries)
             {
                 foreach (ScoringAction a in m.scoredValues)
                 {
@@ -29,8 +29,8 @@ namespace WICScoring.WIC
                 }
                 sumSpeed += m.scoreIndex;
             }
-            speedIndex = sumSpeed / allMatcheEntries.Count;
-            averageScore = sum / allMatcheEntries.Count;
+            speedIndex = sumSpeed / allMatchEntries.Count;
+            averageScore = sum / allMatchEntries.Count;
         }
     }
 }
